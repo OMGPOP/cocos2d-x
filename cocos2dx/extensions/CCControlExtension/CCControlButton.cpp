@@ -144,7 +144,14 @@ CCControlButton* CCControlButton::buttonWithTitleAndFontNameAndFontSize(string t
 bool CCControlButton::initWithBackgroundSprite(CCScale9Sprite* sprite)
 {
     CCLabelTTF *label = CCLabelTTF::labelWithString("", "Arial", 30);//
-    return initWithLabelAndBackgroundSprite(label, sprite);
+
+    if (initWithLabelAndBackgroundSprite(label, sprite)){
+        this->setAdjustBackgroundImage(false);
+        return true;
+    }else {
+        return false;
+    }
+
 }
 
 CCControlButton* CCControlButton::buttonWithBackgroundSprite(CCScale9Sprite* sprite)

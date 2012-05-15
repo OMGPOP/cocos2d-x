@@ -58,6 +58,14 @@ bool CCScale9Sprite::initWithBatchNode(CCSpriteBatchNode* batchnode, CCRect rect
                                 m_originalSize.width / 3,
                                 m_originalSize.height / 3);
     }
+    else {
+        m_capInsets = CCRectMake(
+                                 rect.origin.x + capInsets.origin.x, 
+                                 rect.origin.y + capInsets.origin.y, 
+                                 capInsets.size.width,
+                                 capInsets.size.height);
+    }
+    
     
     // Get the image edges
     float l = rect.origin.x;

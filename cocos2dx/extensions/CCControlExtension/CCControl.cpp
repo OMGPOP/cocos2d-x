@@ -51,9 +51,7 @@ bool CCControl::init()
         m_bSelected=false;
         m_bHighlighted=false;
 
-        // Set the touch dispatcher priority by default to 1
-        m_nDefaultTouchPriority = 1;
-        this->setDefaultTouchPriority(m_nDefaultTouchPriority);
+        this->setDefaultTouchPriority(kCCMenuHandlerPriority);
         // Initialise the tables
         dispatchTable=new CCDictionary();    
         //dispatchTable->autorelease();
@@ -72,7 +70,7 @@ CCControl::~CCControl()
     //Menu - Events
 void CCControl::registerWithTouchDispatcher()
 {
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, true);
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, m_nDefaultTouchPriority, true);
 }
 
 void CCControl::onEnter()
