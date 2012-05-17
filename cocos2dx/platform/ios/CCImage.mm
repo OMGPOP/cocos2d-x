@@ -232,7 +232,7 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
                 if (font)
                 {
                     //dim = [str sizeWithZFont:font];
-                    dim =_caculateStringSizeWithFontOrZFont(str, font, &constrainSize, true);
+                    dim =_calculateStringSizeWithFontOrZFont(str, font, &constrainSize, true);
                 }  
         }
 #endif // CC_FONT_LABEL_SUPPORT
