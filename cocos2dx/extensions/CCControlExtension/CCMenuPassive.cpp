@@ -38,10 +38,27 @@ CCMenuPassive * CCMenuPassive::menuWithItems(CCNode* item, ...)
     return NULL;
 }
 
+CCMenuPassive* CCMenuPassive::menuWithArray(CCArray* pArrayOfItems)
+{
+    CCMenuPassive *pRet = new CCMenuPassive();
+    if (pRet && pRet->initWithArray(pArrayOfItems))
+    {
+        pRet->autorelease();
+    }
+    else
+    {
+        CC_SAFE_DELETE(pRet);
+    }
+    
+    return pRet;
+}
+
 CCMenuPassive* CCMenuPassive::menuWithItem(CCNode* item)
 {
     return menuWithItems(item, NULL);
 }
+
+
 
 bool CCMenuPassive::initWithItems(CCNode* item, va_list args)
 {
@@ -76,6 +93,36 @@ bool CCMenuPassive::initWithItems(CCNode* item, va_list args)
         return true;
     }
 
+    return false;
+}
+
+bool CCMenuPassive::initWithArray(CCArray* pArrayOfItems)
+{
+    if (CCLayer::init())
+    {
+        // menu in the center of the screen
+        CCSize s = CCDirector::sharedDirector()->getWinSize();
+        
+        this->m_bIsRelativeAnchorPoint = false;
+        setAnchorPoint(ccp(0.5f, 0.5f));
+        this->setContentSize(s);
+        
+        setPosition(ccp(s.width/2, s.height/2));
+        
+        if (pArrayOfItems != NULL)
+        {
+            int z=0;
+            CCObject* pObj = NULL;
+            CCARRAY_FOREACH(pArrayOfItems, pObj)
+            {
+                CCNode* item = (CCNode*)pObj;
+                this->addChild(item, z);
+                z++;
+            }
+        }
+        
+        return true;
+    }
     return false;
 }
 

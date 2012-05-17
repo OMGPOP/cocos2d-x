@@ -31,6 +31,12 @@ public:
 
         /** initializes a CCMenu with it's items */
         bool initWithItems(CCNode* item, va_list args);
+    
+        /** creates a CCMenu with a NSArray of CCMenuItem objects */
+        static CCMenuPassive* menuWithArray(CCArray* pArrayOfItems);
+    
+        /** initializes a CCMenu with a NSArray of CCMenuItem objects */
+        bool initWithArray(CCArray* pArrayOfItems);
 
             /** align items vertically */
         void alignItemsVertically();
