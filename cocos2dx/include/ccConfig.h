@@ -29,6 +29,10 @@ THE SOFTWARE.
 
 #include "CCPlatformConfig.h"
 
+#ifndef CC_FONT_LABEL_SUPPORT
+#define CC_FONT_LABEL_SUPPORT 1
+#endif
+
 /**
  @file
  cocos2d (cc) configuration file
