@@ -149,7 +149,7 @@ void CCMenuPassive::alignItemsVerticallyWithPadding(float padding)
         }
     }
     float width=0;
-    float y = height / 2.0f;
+    float y = height * (this->getAnchorPoint().y);
     if (m_pChildren && m_pChildren->count() > 0)
     {
         CCObject* pObject = NULL;
@@ -159,7 +159,7 @@ void CCMenuPassive::alignItemsVerticallyWithPadding(float padding)
             if (pChild)
             {
                 width=max(width, pChild->getContentSize().width);
-                pChild->setPosition(ccp(0, y - pChild->getContentSize().height * pChild->getScaleY() / 2.0f));
+                pChild->setPosition(ccp(0, y - pChild->getContentSize().height * pChild->getScaleY() * pChild->getAnchorPoint().y));
                 y -= pChild->getContentSize().height * pChild->getScaleY() + padding;
             }
         }
@@ -190,7 +190,7 @@ void CCMenuPassive::alignItemsHorizontallyWithPadding(float padding)
     }
 
     float height=0;
-    float x = -width / 2.0f;
+    float x = width  * -(this->getAnchorPoint().x);
     if (m_pChildren && m_pChildren->count() > 0)
     {
         CCObject* pObject = NULL;
@@ -200,7 +200,8 @@ void CCMenuPassive::alignItemsHorizontallyWithPadding(float padding)
             if (pChild)
             {
                 height=max(height, pChild->getContentSize().height);
-                pChild->setPosition(ccp(x + pChild->getContentSize().width * pChild->getScaleX() / 2.0f, 0));
+                pChild->setPosition(ccp(x + pChild->getContentSize().width * pChild->getScaleX() * pChild->getAnchorPoint().x, 0));
+                
                  x += pChild->getContentSize().width * pChild->getScaleX() + padding;
             }
         }
