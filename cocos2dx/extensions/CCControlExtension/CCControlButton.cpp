@@ -51,7 +51,7 @@ CCControlButton::~CCControlButton()
 //initialisers
 
 
-bool CCControlButton::initWithLabelAndBackgroundSprite(CCNode* node, CCScale9Sprite* backgroundSprite)
+bool CCControlButton::initWithLabelAndBackgroundSprite(CCNode* node, CCNode* backgroundSprite)
 {
     if (CCControl::init())
     {
@@ -119,7 +119,7 @@ bool CCControlButton::initWithLabelAndBackgroundSprite(CCNode* node, CCScale9Spr
         return false;
 }
 
-CCControlButton* CCControlButton::buttonWithLabelAndBackgroundSprite(CCNode* label, CCScale9Sprite* backgroundSprite)
+CCControlButton* CCControlButton::buttonWithLabelAndBackgroundSprite(CCNode* label, CCNode* backgroundSprite)
 {
     CCControlButton *pRet = new CCControlButton();
     pRet->initWithLabelAndBackgroundSprite(label, backgroundSprite);
@@ -141,7 +141,7 @@ CCControlButton* CCControlButton::buttonWithTitleAndFontNameAndFontSize(string t
     return pRet;
 }
 
-bool CCControlButton::initWithBackgroundSprite(CCScale9Sprite* sprite)
+bool CCControlButton::initWithBackgroundSprite(CCNode* sprite)
 {
     CCLabelTTF *label = CCLabelTTF::labelWithString("", "Arial", 30);//
 
@@ -154,7 +154,7 @@ bool CCControlButton::initWithBackgroundSprite(CCScale9Sprite* sprite)
 
 }
 
-CCControlButton* CCControlButton::buttonWithBackgroundSprite(CCScale9Sprite* sprite)
+CCControlButton* CCControlButton::buttonWithBackgroundSprite(CCNode* sprite)
 {
     CCControlButton *pRet = new CCControlButton();
     pRet->initWithBackgroundSprite(sprite);
@@ -297,20 +297,20 @@ void CCControlButton::setTitleLabelForState(CCNode* titleLabel, CCControlState s
 }
 
 
-CCScale9Sprite* CCControlButton::getBackgroundSpriteForState(CCControlState state)
+CCNode* CCControlButton::getBackgroundSpriteForState(CCControlState state)
 {
-    CCScale9Sprite* backgroundSprite=(CCScale9Sprite*)m_backgroundSpriteDispatchTable->objectForKey(state);    
+    CCNode* backgroundSprite=(CCNode*)m_backgroundSpriteDispatchTable->objectForKey(state);    
     if (backgroundSprite)
     {
         return backgroundSprite;
     }
-    return (CCScale9Sprite*)m_backgroundSpriteDispatchTable->objectForKey(CCControlStateNormal);
+    return (CCNode*)m_backgroundSpriteDispatchTable->objectForKey(CCControlStateNormal);
 }
 
 
-void CCControlButton::setBackgroundSpriteForState(CCScale9Sprite* sprite, CCControlState state)
+void CCControlButton::setBackgroundSpriteForState(CCNode* sprite, CCControlState state)
 {
-    CCScale9Sprite* previousSprite = (CCScale9Sprite*)m_backgroundSpriteDispatchTable->objectForKey(state);
+    CCNode* previousSprite = (CCNode*)m_backgroundSpriteDispatchTable->objectForKey(state);
     if (previousSprite)
     {
         removeChild(previousSprite, true);
@@ -358,26 +358,42 @@ void CCControlButton::needsLayout()
 
     // Get the title label size
     CCSize titleLabelSize =m_titleLabel->boundingBox().size;
+    CCSize titleLabelSizeWithMargins = CCSizeMake(titleLabelSize.width + m_marginH * 2, titleLabelSize.height + m_marginV * 2);
     
     // Adjust the background image if necessary
     if (m_adjustBackgroundImage)
     {
         // Add the margins
-        m_backgroundSprite->setContentSize(CCSizeMake(titleLabelSize.width + m_marginH * 2, titleLabelSize.height + m_marginV * 2));
+        m_backgroundSprite->setContentSize(titleLabelSizeWithMargins);
     } 
     else
-    {        
-        //TODO: should this also have margins if one of the preferred sizes is relaxed?
-        CCSize preferredSize = m_backgroundSprite->getPreferredSize();
-        if (preferredSize.width <= 0)
-        {
-            preferredSize.width = titleLabelSize.width;
-        }
-        if (preferredSize.height <= 0)
-        {
-            preferredSize.height = titleLabelSize.height;
-        }
+    {     
+        CCSize preferredSize = titleLabelSizeWithMargins;
         
+        CCScale9Sprite* scale9Bg = dynamic_cast<CCScale9Sprite*>(m_backgroundSprite);
+        if ( scale9Bg )
+        {
+            //TODO: should this also have margins if one of the preferred sizes is relaxed?
+            preferredSize = scale9Bg->getPreferredSize();
+            if (preferredSize.width <= 0)
+            {
+                preferredSize.width = titleLabelSize.width;
+            }
+            if (preferredSize.height <= 0)
+            {
+                preferredSize.height = titleLabelSize.height;
+            }
+        }
+        else 
+        {
+            CCSprite* spriteBG = dynamic_cast<CCSprite*>(m_backgroundSprite);
+            if ( spriteBG )
+            {
+                CCSize testSize = spriteBG->getTextureRect().size;
+                if ( testSize.width > 0 && testSize.height > 0 )
+                    preferredSize = testSize;
+            }
+        }
         m_backgroundSprite->setContentSize(preferredSize);        
     }
     

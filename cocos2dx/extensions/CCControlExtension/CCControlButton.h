@@ -63,7 +63,7 @@ protected:
     CCNode* m_titleLabel;
     /** The current background sprite. */
     //CC_PROPERTY(CCScale9Sprite*, m_backgroundSprite, BackgroundSprite);
-    CCScale9Sprite* m_backgroundSprite;
+    CCNode* m_backgroundSprite;
 
     /** Flag to know if the button is currently pushed.  */
     CC_SYNTHESIZE_READONLY(bool, pushed, IsPushed); 
@@ -85,14 +85,14 @@ protected:
 
 
 public:
-    virtual bool initWithLabelAndBackgroundSprite(CCNode* label, CCScale9Sprite* backgroundSprite);
-    static CCControlButton* buttonWithLabelAndBackgroundSprite(CCNode* label, CCScale9Sprite* backgroundSprite);    
+    virtual bool initWithLabelAndBackgroundSprite(CCNode* label, CCNode* backgroundSprite);
+    static CCControlButton* buttonWithLabelAndBackgroundSprite(CCNode* label, CCNode* backgroundSprite);    
     
     virtual bool initWithTitleAndFontNameAndFontSize(std::string title, const char * fontName, float fontSize);
     static CCControlButton* buttonWithTitleAndFontNameAndFontSize(std::string title, const char * fontName, float fontSize);
     
-    virtual bool initWithBackgroundSprite(CCScale9Sprite* sprite);
-    static CCControlButton* buttonWithBackgroundSprite(CCScale9Sprite* sprite);
+    virtual bool initWithBackgroundSprite(CCNode* sprite);
+    static CCControlButton* buttonWithBackgroundSprite(CCNode* sprite);
     
     //events
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
@@ -168,7 +168,7 @@ public:
     * @param state The state that uses the background sprite. Possible values are
     * described in "CCControlState".
     */
-    virtual CCScale9Sprite* getBackgroundSpriteForState(CCControlState state);
+    virtual CCNode* getBackgroundSpriteForState(CCControlState state);
 
     /**
     * Sets the background sprite to use for the specified button state.
@@ -177,7 +177,7 @@ public:
     * @param state The state that uses the specified image. The values are described
     * in "CCControlState".
     */
-    virtual void setBackgroundSpriteForState(CCScale9Sprite* sprite, CCControlState state);
+    virtual void setBackgroundSpriteForState(CCNode* sprite, CCControlState state);
 
 };
 
