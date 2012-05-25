@@ -53,6 +53,7 @@ protected:
     background will use the prefered size of the background image. */
     CC_PROPERTY(bool, m_adjustBackgroundImage, AdjustBackgroundImage); 
 
+    CC_SYNTHESIZE(bool, m_zoomOnTouch, ZoomOnTouch); 
     
     /** The current title that is displayed on the button. */
     CC_SYNTHESIZE_READONLY(CCString*, m_currentTitle, CurrentTitle); 

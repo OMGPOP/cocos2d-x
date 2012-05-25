@@ -70,6 +70,8 @@ bool CCControlButton::initWithLabelAndBackgroundSprite(CCNode* node, CCNode* bac
         // Adjust the background image by default
         m_adjustBackgroundImage=true;
 
+        m_zoomOnTouch = true;
+        
         // Set the default anchor point
         setIsRelativeAnchorPoint(true);
         setAnchorPoint(ccp(0.5f, 0.5f));
@@ -193,10 +195,12 @@ void CCControlButton::setIsHighlighted(bool enabled)
     }
     needsLayout();
 
-    float scaleValue = (getIsHighlighted() && getIsEnabled() && !getIsSelected()) ? 1.1f : 1.0f;
-    CCAction *zoomAction =CCScaleTo::actionWithDuration(0.05f, scaleValue);
-    zoomAction->setTag(kZoomActionTag);
-    runAction(zoomAction);
+    if (m_zoomOnTouch){
+        float scaleValue = (getIsHighlighted() && getIsEnabled() && !getIsSelected()) ? 1.1f : 1.0f;
+        CCAction *zoomAction =CCScaleTo::actionWithDuration(0.05f, scaleValue);
+        zoomAction->setTag(kZoomActionTag);
+        runAction(zoomAction);
+    }
 }
 void CCControlButton::setAdjustBackgroundImage(bool adjustBackgroundImage)
 {
