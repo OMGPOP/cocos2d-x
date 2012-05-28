@@ -118,10 +118,7 @@ void CCNotificationCenter::postNotification(const char *name, CCObject *object)
 {
     CCObject* obj = NULL;
     
-    CCARRAY_FOREACH(m_observers, obj)
-    {
-        m_tobservers->addObject(obj);
-    }
+    m_tobservers->addObjectsFromArray(m_observers);
     
     CCARRAY_FOREACH(m_tobservers, obj)
     {
