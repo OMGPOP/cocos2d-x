@@ -36,6 +36,9 @@ CCNotificationCenter::CCNotificationCenter()
 {
     m_observers = CCArray::arrayWithCapacity(3);
     m_observers->retain();
+    
+    m_tobservers = CCArray::arrayWithCapacity(3);
+    m_tobservers->retain();
 }
 
 CCNotificationCenter::~CCNotificationCenter()
@@ -114,7 +117,13 @@ void CCNotificationCenter::removeObserver(CCObject *target,const char *name)
 void CCNotificationCenter::postNotification(const char *name, CCObject *object)
 {
     CCObject* obj = NULL;
+    
     CCARRAY_FOREACH(m_observers, obj)
+    {
+        m_tobservers->addObject(obj);
+    }
+    
+    CCARRAY_FOREACH(m_tobservers, obj)
     {
         CCNotificationObserver* observer = (CCNotificationObserver*) obj;
         if (!observer)
@@ -123,6 +132,8 @@ void CCNotificationCenter::postNotification(const char *name, CCObject *object)
         if (!strcmp(name,observer->getName()))
             observer->performSelector(object);
     }
+    
+    m_tobservers->removeAllObjects();
 }
 
 void CCNotificationCenter::postNotification(const char *name)

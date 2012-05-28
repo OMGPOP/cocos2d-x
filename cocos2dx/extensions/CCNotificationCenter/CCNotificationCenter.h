@@ -61,6 +61,7 @@ private:
     // variables
     //
     cocos2d::CCArray *m_observers;
+    cocos2d::CCArray *m_tobservers;
 };
 
 class CC_DLL CCNotificationObserver : public CCObject
