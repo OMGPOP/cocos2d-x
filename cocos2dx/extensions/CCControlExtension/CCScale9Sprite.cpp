@@ -158,8 +158,8 @@ void CCScale9Sprite::setContentSize(const CCSize &size)
     CCNode::setContentSize(size);
     setAnchorPoint(ccp(0.5f,0.5f));
     
-    CCLOG("scale9 set content size %0.2f %0.2f",size.width,size.height);
-    CCLOG("leftCap %0.2f rightCap %0.2f",topLeft->getContentSize().width,topRight->getContentSize().width);
+//    CCLOG("scale9 set content size %0.2f %0.2f",size.width,size.height);
+//    CCLOG("leftCap %0.2f rightCap %0.2f",topLeft->getContentSize().width,topRight->getContentSize().width);
     
     float sizableWidth = size.width - topLeft->getContentSize().width - topRight->getContentSize().width;
     float sizableHeight = size.height - topLeft->getContentSize().height - bottomRight->getContentSize().height;
@@ -190,7 +190,7 @@ void CCScale9Sprite::setContentSize(const CCSize &size)
     
     centre->setPosition(ccp(despx, despy));
     
-    CCLOG("Scale9 setContentSize %02.f x %02.f <%0.2f x %0.2f>",sizableWidth,sizableHeight,horizontalScale,verticalScale);
+//    CCLOG("Scale9 setContentSize %02.f x %02.f <%0.2f x %0.2f>",sizableWidth,sizableHeight,horizontalScale,verticalScale);
 }
 
 bool CCScale9Sprite::initWithFile(const char* file, CCRect rect,  CCRect capInsets)
