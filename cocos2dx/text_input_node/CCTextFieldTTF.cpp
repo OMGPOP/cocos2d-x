@@ -168,6 +168,20 @@ bool CCTextFieldTTF::canDetachWithIME()
     return (m_pDelegate) ? (! m_pDelegate->onTextFieldDetachWithIME(this)) : true;
 }
 
+void CCTextFieldTTF::keyboardWillShow(CCIMEKeyboardNotificationInfo& info) 
+{
+    if (m_pDelegate) {
+        m_pDelegate->onTextFieldKeyboardWillShow(this, info);
+    }
+}
+
+void CCTextFieldTTF::keyboardWillHide(CCIMEKeyboardNotificationInfo& info) 
+{
+    if (m_pDelegate) {
+        m_pDelegate->onTextFieldKeyboardWillHide(this, info);
+    }
+}
+
 void CCTextFieldTTF::insertText(const char * text, int len)
 {
     std::string sInsert(text, len);
