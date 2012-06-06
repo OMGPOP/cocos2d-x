@@ -53,20 +53,6 @@ public:
         CC_UNUSED_PARAM(sender);
         return false;
     }
-    
-    /**
-     @brief KeyboardWillShow notification
-     */
-    virtual void onTextFieldKeyboardWillShow(CCTextFieldTTF * sender, CCIMEKeyboardNotificationInfo& info) {
-        CC_UNUSED_PARAM(sender);
-    }
-    
-    /**
-     @brief KeyboardWillHide notification
-     */
-    virtual void onTextFieldKeyboardWillHide(CCTextFieldTTF * sender, CCIMEKeyboardNotificationInfo& info) {
-        CC_UNUSED_PARAM(sender);
-    }
 
     /**
     @brief    If the sender doesn't want to insert the text, return true;
@@ -162,8 +148,6 @@ protected:
 
     virtual bool canAttachWithIME();
     virtual bool canDetachWithIME();
-    virtual void keyboardWillShow(CCIMEKeyboardNotificationInfo& info);
-    virtual void keyboardWillHide(CCIMEKeyboardNotificationInfo& info);
     virtual void insertText(const char * text, int len);
     virtual void deleteBackward();
     virtual const char * getContentText();
