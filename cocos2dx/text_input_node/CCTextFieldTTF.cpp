@@ -138,6 +138,7 @@ bool CCTextFieldTTF::attachWithIME()
         if (pGlView)
         {
             pGlView->setIMEKeyboardState(true);
+            if(m_pDelegate) m_pDelegate->onShowKeyboard(this);
         }
     }
     return bRet;
@@ -153,6 +154,7 @@ bool CCTextFieldTTF::detachWithIME()
         if (pGlView)
         {
             pGlView->setIMEKeyboardState(false);
+            if(m_pDelegate) m_pDelegate->onHideKeyboard(this);
         }
     }
     return bRet;

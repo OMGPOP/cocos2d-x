@@ -36,6 +36,17 @@ class CCTextFieldTTF;
 class CC_DLL CCTextFieldDelegate
 {
 public:
+    
+    virtual void onShowKeyboard(CCTextFieldTTF * sender)
+    { 
+        CC_UNUSED_PARAM(sender);
+    }
+    
+    virtual void onHideKeyboard(CCTextFieldTTF * sender)
+    { 
+        CC_UNUSED_PARAM(sender);
+    }
+    
     /**
     @brief    If the sender doesn't want to attach with IME, return true;
     */
