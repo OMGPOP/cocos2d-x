@@ -134,6 +134,7 @@ public:
     CC_SYNTHESIZE(CCTextFieldDelegate *, m_pDelegate, Delegate);
     CC_SYNTHESIZE_READONLY(int, m_nCharCount, CharCount);
     CC_SYNTHESIZE_PASS_BY_REF(ccColor3B, m_ColorSpaceHolder, ColorSpaceHolder);
+    CC_SYNTHESIZE(bool, m_IsPassword, IsPassword);
 
     // input text property
 public:

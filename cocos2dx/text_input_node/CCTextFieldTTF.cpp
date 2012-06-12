@@ -53,6 +53,7 @@ static int _calcCharCount(const char * pszText)
 CCTextFieldTTF::CCTextFieldTTF()
 : m_pDelegate(0)
 , m_nCharCount(0)
+, m_IsPassword(0)
 , m_pInputText(new std::string)
 , m_pPlaceHolder(new std::string)   // prevent CCLabelTTF initWithString assertion
 {
@@ -276,6 +277,12 @@ void CCTextFieldTTF::draw()
 // properties
 //////////////////////////////////////////////////////////////////////////
 
+static void fillWithStars(std::string &text, int count) {
+    for (int i = 0; i < count; i++) {
+        text.append("*");
+    }
+}
+
 // input text property
 void CCTextFieldTTF::setString(const char *text)
 {
@@ -297,7 +304,18 @@ void CCTextFieldTTF::setString(const char *text)
     }
     else
     {
-        CCLabelTTF::setString(m_pInputText->c_str());
+        if (m_IsPassword)
+        {
+            int length = _calcCharCount(m_pInputText->c_str());
+            std::string passwordText;
+            
+            fillWithStars(passwordText, length);
+            CCLabelTTF::setString(passwordText.c_str());
+        }
+        else
+        {
+            CCLabelTTF::setString(m_pInputText->c_str());
+        }
     }
     m_nCharCount = _calcCharCount(m_pInputText->c_str());
 }
