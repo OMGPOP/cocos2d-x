@@ -19,13 +19,13 @@ CCApplication::CCApplication()
 {
     m_hInstance    = GetModuleHandle(NULL);
     m_nAnimationInterval.QuadPart = 0;
-    CC_ASSERT(! sm_pSharedApplication);
+    CC_ASSERT(! sm_pSharedApplication, "");
     sm_pSharedApplication = this;
 }
 
 CCApplication::~CCApplication()
 {
-    CC_ASSERT(this == sm_pSharedApplication);
+    CC_ASSERT(this == sm_pSharedApplication, "");
     sm_pSharedApplication = NULL;
 }
 
@@ -101,7 +101,7 @@ void CCApplication::setAnimationInterval(double interval)
 //////////////////////////////////////////////////////////////////////////
 CCApplication& CCApplication::sharedApplication()
 {
-    CC_ASSERT(sm_pSharedApplication);
+    CC_ASSERT(sm_pSharedApplication, "");
     return *sm_pSharedApplication;
 }
 

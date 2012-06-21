@@ -35,7 +35,7 @@ THE SOFTWARE.
 #include "CCStdC.h"
 
 #ifndef CCAssert
-#define CCAssert(cond, msg)         CC_ASSERT(cond)
+#define CCAssert(cond, msg)         CC_ASSERT(cond,msg)
 #endif  // CCAssert
 
 #include "ccConfig.h"

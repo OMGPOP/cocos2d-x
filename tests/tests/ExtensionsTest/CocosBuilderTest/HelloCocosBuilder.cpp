@@ -46,13 +46,13 @@ bool HelloCocosBuilder::callbackSetChildren(const char* name, CCObject* node)
     if (strcmp(name, "sprtBurst") == 0)
     {
         m_pSpriteBurst = dynamic_cast<CCSprite*>(node);
-        CC_ASSERT(m_pSpriteBurst);
+        CC_ASSERT(m_pSpriteBurst, "");
         m_pSpriteBurst->retain();
     }
     else if (strcmp(name, "sprtIcon") == 0)
     {
         m_pSpriteIcon = dynamic_cast<CCSprite*>(node);
-        CC_ASSERT(m_pSpriteIcon);
+        CC_ASSERT(m_pSpriteIcon, "");
         m_pSpriteIcon->retain();
     }
     

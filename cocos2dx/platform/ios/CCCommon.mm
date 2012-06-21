@@ -47,6 +47,7 @@ void CCLog(const char * pszFormat, ...)
 // ios no MessageBox, use CCLog instead
 void CCMessageBox(const char * pszMsg, const char * pszTitle)
 {
+    CCLog("Message box: %s %s", pszMsg, pszTitle);
     NSString * title = (pszTitle) ? [NSString stringWithUTF8String : pszTitle] : nil;
     NSString * msg = (pszMsg) ? [NSString stringWithUTF8String : pszMsg] : nil;
     UIAlertView * messageBox = [[UIAlertView alloc] initWithTitle: title

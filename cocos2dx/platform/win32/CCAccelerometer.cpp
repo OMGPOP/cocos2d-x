@@ -39,14 +39,14 @@ namespace
     template <class T>
     T CLAMP( const T val,const T minVal,const T maxVal )
     {
-        CC_ASSERT( minVal<=maxVal );
+        CC_ASSERT( minVal<=maxVal, "" );
         T    result=val;
         if ( result<minVal )
             result=minVal;
         else if ( result>maxVal )
             result=maxVal;
 
-        CC_ASSERT( minVal<=result && result<=maxVal );
+        CC_ASSERT( minVal<=result && result<=maxVal, "" );
         return result;
     }
 
@@ -124,7 +124,7 @@ namespace
             break;
         default:
             // Not expected to get here!!
-            CC_ASSERT( false );
+            CC_ASSERT( false, "" );
             break;
         }
 

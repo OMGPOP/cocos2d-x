@@ -9,7 +9,7 @@
 #endif
 
 #include <assert.h>
-#define CC_ASSERT(cond)    assert(cond)
+#define CC_ASSERT(cond, msg)    assert(cond)
 #define CC_UNUSED_PARAM(unusedparam) (void)unusedparam
 
 /* Define NULL pointer value */

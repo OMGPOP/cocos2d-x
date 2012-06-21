@@ -3,14 +3,14 @@
 
 #define CC_DLL 
 
-#define CC_ASSERT(cond) \
+#define CC_ASSERT(cond, msg) \
 if (! (cond)) \
 { \
     char content[100]; \
-    sprintf(content, "%s function:%s line:%d", __FILE__, __FUNCTION__, __LINE__ - 3);  \
+    sprintf(content, "%s %s function:%s line:%d", msg, __FILE__, __FUNCTION__, __LINE__ - 4);  \
+    CCLog("Assert %s %s", content, msg); \
     CCMessageBox(content, "Assert error"); \
 }
-
 
 #define CC_UNUSED_PARAM(unusedparam) (void)unusedparam
 

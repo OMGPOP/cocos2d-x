@@ -47,6 +47,7 @@ void CCLog(const char * pszFormat, ...)
 
 void CCMessageBox(const char * pszMsg, const char * pszTitle)
 {
+	CCLog("Message box: %s %s", pszMsg, pszTitle);
     showMessageBoxJNI(pszMsg, pszTitle);
 }
 
