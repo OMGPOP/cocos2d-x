@@ -40,7 +40,6 @@ THE SOFTWARE.
 #include "CCApplication.h"
 #include "CCLabelBMFont.h"
 #include "CCActionManager.h"
-#include "CCLabelTTF.h"
 #include "CCConfiguration.h"
 #include "CCKeypadDispatcher.h"
 #include "CCAccelerometer.h"
@@ -55,6 +54,7 @@ THE SOFTWARE.
 #include "CCEGLView.h"
 #include "extensions/CCNotificationCenter/CCNotificationCenter.h"
 #include "extensions/CCTextureWatcher/CCTextureWatcher.h"
+#include "extensions/CCBReader/CCBCustomClass.h"
 #include <string>
 
 using namespace std;
@@ -583,14 +583,16 @@ void CCDirector::purgeDirector()
 
     // purge all managers ／ caches
     CCAnimationCache::purgeSharedAnimationCache();
-     CCSpriteFrameCache::purgeSharedSpriteFrameCache();
+    CCSpriteFrameCache::purgeSharedSpriteFrameCache();
     CCTextureCache::purgeSharedTextureCache();
     CCShaderCache::purgeSharedShaderCache();
-    
+    CCConfiguration::purgeConfiguration();
+
     // cocos2d-x specific data structures
     CCUserDefault::purgeSharedUserDefault();
     extension::CCNotificationCenter::purgeNotificationCenter();
     extension::CCTextureWatcher::purgeTextureWatcher();
+    extension::CCBCustomClassFactory::purgeFactory();
 
     ccGLInvalidateStateCache();
     
@@ -719,9 +721,9 @@ void CCDirector::createStatsLabel()
     CC_SAFE_RELEASE_NULL(m_pSPFLabel);
     CC_SAFE_RELEASE_NULL(m_pDrawsLabel);
     
-    m_pFPSLabel = CCLabelTTF::labelWithString("00.0", "Arial", 16);
-    m_pSPFLabel = CCLabelTTF::labelWithString("0.000", "Arial", 16);
-    m_pDrawsLabel = CCLabelTTF::labelWithString("000", "Arial", 16);
+    m_pFPSLabel = CCLabelBMFont::labelWithString("00.0", "fps_images.fnt");
+    m_pSPFLabel = CCLabelBMFont::labelWithString("0.000", "fps_images.fnt");
+    m_pDrawsLabel = CCLabelBMFont::labelWithString("000", "fps_images.fnt");
     
     m_pFPSLabel->retain();
     m_pSPFLabel->retain();
