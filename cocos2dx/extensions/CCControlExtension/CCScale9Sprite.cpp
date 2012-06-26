@@ -109,7 +109,7 @@ bool CCScale9Sprite::updateWithBatchNode(CCSpriteBatchNode* batchnode, CCRect re
                                 m_originalSize.height / 3);
     }
     else {
-        m_capInsets = CCRectMake(
+        m_capInsetsInternal = CCRectMake(
                                  rect.origin.x + capInsets.origin.x, 
                                  rect.origin.y + capInsets.origin.y, 
                                  capInsets.size.width,
