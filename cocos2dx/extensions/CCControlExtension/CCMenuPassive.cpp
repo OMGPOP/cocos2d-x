@@ -128,7 +128,7 @@ bool CCMenuPassive::initWithArray(CCArray* pArrayOfItems)
         // menu in the center of the screen
         CCSize s = CCDirector::sharedDirector()->getWinSize();
         
-        this->m_bIsRelativeAnchorPoint = false;
+        this->m_bIgnoreAnchorPointForPosition = true;
         setAnchorPoint(ccp(0.5f, 0.5f));
         this->setContentSize(s);
         
