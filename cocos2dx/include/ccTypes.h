@@ -339,6 +339,8 @@ typedef enum
     kCCTextAlignmentRight,
 } CCTextAlignment;
 
+typedef float ccTime;
+
 // types for animation in particle systems
 
 // texture coordinates for a quad
