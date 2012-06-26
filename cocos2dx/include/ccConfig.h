@@ -27,7 +27,7 @@ THE SOFTWARE.
 #ifndef __CCCONFIG_H__
 #define __CCCONFIG_H__
 
-#include "CCPlatformConfig.h"
+#include "platform/CCPlatformConfig.h"
 
 #ifndef CC_FONT_LABEL_SUPPORT
 #define CC_FONT_LABEL_SUPPORT 1
