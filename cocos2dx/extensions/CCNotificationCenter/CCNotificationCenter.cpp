@@ -37,7 +37,7 @@ CCNotificationCenter::CCNotificationCenter()
     m_observers = CCArray::create(3);
     m_observers->retain();
     
-    m_tobservers = CCArray::arrayWithCapacity(3);
+    m_tobservers = CCArray::create(3);
     m_tobservers->retain();
 }
 
