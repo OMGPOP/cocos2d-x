@@ -158,24 +158,9 @@ CCSequence* CCSequence::actionOneTwo(CCFiniteTimeAction *pActionOne, CCFiniteTim
 
 CCSequence* CCSequence::create(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo)
 {
-    //asdf
-    
-    CCSequence *pSequence = NULL;
-    
-    if ( pActionTwo == NULL )
-    {
-        CCFiniteTimeAction* pAction = CCSequence::create(pActionOne,NULL,NULL);
-        pSequence = (CCSequence*)pAction;
-    }
-    else {
-        pSequence = new CCSequence();
-        pSequence->initOneTwo(pActionOne, pActionTwo);
-        
-    }
-    
-    
+    CCSequence *pSequence = new CCSequence();
+    pSequence->initOneTwo(pActionOne, pActionTwo);
     pSequence->autorelease();
-    
 
     return pSequence;
 }
