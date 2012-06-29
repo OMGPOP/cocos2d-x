@@ -113,6 +113,8 @@ class CC_DLL CCBReader : public CCObject {
         CCNode * mRootNode;
         CCSize mRootContainerSize;
         float mResolutionScale;
+    
+        bool mSpriteSheetLoadingEnabled;
 
         CCNodeLoaderLibrary * mCCNodeLoaderLibrary;
         CCNodeLoaderListener * mCCNodeLoaderListener;
@@ -143,6 +145,8 @@ class CC_DLL CCBReader : public CCObject {
 
         bool isSpriteSheetLoaded(CCString * pSpriteSheet);
         void addLoadedSpriteSheet(CCString * pSpriteSheet);
+        void setSpriteSheetLoadingEnabled(bool value) { mSpriteSheetLoadingEnabled = value; }
+        
 
         /* Utility methods. */
         static CCString * lastPathComponent(CCString * pString);

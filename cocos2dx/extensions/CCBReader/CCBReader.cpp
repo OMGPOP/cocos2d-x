@@ -26,6 +26,7 @@ CCBReader::CCBReader(CCNodeLoaderLibrary * pCCNodeLoaderLibrary, CCBMemberVariab
     this->mCCNodeLoaderListener = pCCNodeLoaderListener;
 
     this->mResolutionScale = 1;
+    this->mSpriteSheetLoadingEnabled = true;
 
 #ifdef __CC_PLATFORM_IOS
     /* iPad */
@@ -355,6 +356,8 @@ CCSize CCBReader::getContainerSize(CCNode * pNode) {
 }
 
 bool CCBReader::isSpriteSheetLoaded(CCString * pSpriteSheet) {
+    if ( !mSpriteSheetLoadingEnabled )
+        return true;
     return this->mLoadedSpriteSheets.find(pSpriteSheet->m_sString) != this->mLoadedSpriteSheets.end();
 }
 
