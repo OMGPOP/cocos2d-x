@@ -153,10 +153,10 @@ CCActionInterval* CCActionInterval::reverse(void)
 //
 CCSequence* CCSequence::actionOneTwo(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo)
 {
-    return CCSequence::createOneTwo(pActionOne, pActionTwo);
+    return CCSequence::create(pActionOne, pActionTwo);
 }
 
-CCSequence* CCSequence::createOneTwo(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo)
+CCSequence* CCSequence::create(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo)
 {
     CCSequence *pSequence = new CCSequence();
     pSequence->initOneTwo(pActionOne, pActionTwo);
@@ -178,7 +178,7 @@ CCFiniteTimeAction* CCSequence::actions(CCFiniteTimeAction *pAction1, ...)
         pNow = va_arg(params, CCFiniteTimeAction*);
         if (pNow)
         {
-            pPrev = CCSequence::createOneTwo(pPrev, pNow);
+            pPrev = CCSequence::create(pPrev, pNow);
         }
         else
         {
@@ -203,7 +203,7 @@ CCFiniteTimeAction* CCSequence::create(CCFiniteTimeAction *pAction1, ...)
         pNow = va_arg(params, CCFiniteTimeAction*);
         if (pNow)
         {
-            pPrev = createOneTwo(pPrev, pNow);
+            pPrev = create(pPrev, pNow);
         }
         else
         {
@@ -226,8 +226,7 @@ CCFiniteTimeAction* CCSequence::create(CCArray* arrayOfActions)
 
     for (unsigned int i = 1; i < arrayOfActions->count(); ++i)
     {
-        CCFiniteTimeAction* action = (CCFiniteTimeAction*)arrayOfActions->objectAtIndex(i);
-        prev = createOneTwo(prev, action);
+        prev = create(prev, (CCFiniteTimeAction*)arrayOfActions->objectAtIndex(i));
     }
 
     return prev;
@@ -348,7 +347,7 @@ void CCSequence::update(float t)
 
 CCActionInterval* CCSequence::reverse(void)
 {
-    return CCSequence::createOneTwo(m_pActions[1]->reverse(), m_pActions[0]->reverse());
+    return CCSequence::create(m_pActions[1]->reverse(), m_pActions[0]->reverse());
 }
 
 //
@@ -671,11 +670,11 @@ bool CCSpawn:: initOneTwo(CCFiniteTimeAction *pAction1, CCFiniteTimeAction *pAct
 
         if (d1 > d2)
         {
-            m_pTwo = CCSequence::createOneTwo(pAction2, CCDelayTime::create(d1 - d2));
+            m_pTwo = CCSequence::create(pAction2, CCDelayTime::create(d1 - d2));
         } else
         if (d1 < d2)
         {
-            m_pOne = CCSequence::createOneTwo(pAction1, CCDelayTime::create(d2 - d1));
+            m_pOne = CCSequence::create(pAction1, CCDelayTime::create(d2 - d1));
         }
 
         m_pOne->retain();

@@ -130,7 +130,7 @@ public:
     /** helper contructor to create an array of sequenceable actions given an array */
     static CCFiniteTimeAction* create(CCArray *arrayOfActions);
     /** creates the action */
-    static CCSequence* createOneTwo(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo);
+    static CCSequence* create(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo);
 
 protected:
     CCFiniteTimeAction *m_pActions[2];
