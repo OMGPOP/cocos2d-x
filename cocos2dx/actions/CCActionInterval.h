@@ -131,6 +131,7 @@ public:
     static CCFiniteTimeAction* create(CCArray *arrayOfActions);
     /** creates the action */
     static CCSequence* create(CCFiniteTimeAction *pActionOne, CCFiniteTimeAction *pActionTwo);
+    static CCFiniteTimeAction* createSingle(CCFiniteTimeAction *pActionOne);
 
 protected:
     CCFiniteTimeAction *m_pActions[2];

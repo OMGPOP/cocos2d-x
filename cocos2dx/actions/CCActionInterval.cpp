@@ -165,6 +165,12 @@ CCSequence* CCSequence::create(CCFiniteTimeAction *pActionOne, CCFiniteTimeActio
     return pSequence;
 }
 
+CCFiniteTimeAction* CCSequence::createSingle(CCFiniteTimeAction *pActionOne)
+{
+    CCFiniteTimeAction *pSequence = create(CCArray::create(pActionOne, NULL));
+    return pSequence;
+}
+
 CCFiniteTimeAction* CCSequence::actions(CCFiniteTimeAction *pAction1, ...)
 {
     va_list params;
