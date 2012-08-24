@@ -106,9 +106,10 @@ void CCNotificationCenter::removeObserver(CCObject *target,const char *name)
         if (!observer)
             continue;
         
+        // Deactivate observer, will be removed later
         if (!strcmp(observer->getName(),name) && observer->getTarget() == target)
         {
-            m_observers->removeObject(observer);
+            observer->setActive(false);
             return;
         }
     }
@@ -118,6 +119,7 @@ void CCNotificationCenter::postNotification(const char *name, CCObject *object)
 {
     CCObject* obj = NULL;
     
+    // Call post on temporary array to avoid errors where something is added while posting
     m_tobservers->addObjectsFromArray(m_observers);
     
     CCARRAY_FOREACH(m_tobservers, obj)
@@ -126,11 +128,25 @@ void CCNotificationCenter::postNotification(const char *name, CCObject *object)
         if (!observer)
             continue;
         
-        if (!strcmp(name,observer->getName()))
+        if (!strcmp(name,observer->getName()) && observer->getActive())
             observer->performSelector(object);
     }
     
     m_tobservers->removeAllObjects();
+    
+    // Remove observers that were deactivated with removeObserver while we were looping
+    CCARRAY_FOREACH(m_observers, obj)
+    {
+        CCNotificationObserver* observer = (CCNotificationObserver*) obj;
+        if (!observer)
+            continue;
+        
+        if (!observer->getActive())
+        {
+            m_observers->removeObject(observer);
+            return;
+        }
+    }
 }
 
 void CCNotificationCenter::postNotification(const char *name)
@@ -151,6 +167,7 @@ CCNotificationObserver::CCNotificationObserver(CCObject *target,
     m_target = target;
     m_selector = selector;
     m_object = obj;
+    m_active = true;
     
     m_name = new char[strlen(name)+1];
     memset(m_name,0,strlen(name)+1);

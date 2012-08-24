@@ -79,6 +79,7 @@ private:
     CC_PROPERTY_READONLY(SEL_CallFuncO, m_selector, Selector);
     CC_PROPERTY_READONLY(char *, m_name, Name);
     CC_PROPERTY_READONLY(CCObject *, m_object, Object);
+    CC_SYNTHESIZE(bool, m_active, Active);
 };
 
 NS_CC_EXT_END
