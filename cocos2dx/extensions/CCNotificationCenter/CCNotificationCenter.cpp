@@ -39,6 +39,8 @@ CCNotificationCenter::CCNotificationCenter()
     
     m_tobservers = CCArray::create(3);
     m_tobservers->retain();
+    
+    isPosting = 0;
 }
 
 CCNotificationCenter::~CCNotificationCenter()
@@ -119,6 +121,8 @@ void CCNotificationCenter::postNotification(const char *name, CCObject *object)
 {
     CCObject* obj = NULL;
     
+    isPosting++;
+    
     // Call post on temporary array to avoid errors where something is added while posting
     m_tobservers->addObjectsFromArray(m_observers);
     
@@ -134,17 +138,21 @@ void CCNotificationCenter::postNotification(const char *name, CCObject *object)
     
     m_tobservers->removeAllObjects();
     
-    // Remove observers that were deactivated with removeObserver while we were looping
-    CCARRAY_FOREACH(m_observers, obj)
+    isPosting--;
+    
+    if ( isPosting == 0 ) // Only remove if we are out of a deep posting recursion
     {
-        CCNotificationObserver* observer = (CCNotificationObserver*) obj;
-        if (!observer)
-            continue;
-        
-        if (!observer->getActive())
+        // Remove observers that were deactivated with removeObserver while we were looping
+        CCARRAY_FOREACH(m_observers, obj)
         {
-            m_observers->removeObject(observer);
-            return;
+            CCNotificationObserver* observer = (CCNotificationObserver*) obj;
+            if (!observer)
+                continue;
+            
+            if (!observer->getActive())
+            {
+                m_observers->removeObject(observer);
+            }
         }
     }
 }
