@@ -62,6 +62,8 @@ private:
     //
     cocos2d::CCArray *m_observers;
     cocos2d::CCArray *m_tobservers;
+    
+    int isPosting;
 };
 
 class CC_DLL CCNotificationObserver : public CCObject
