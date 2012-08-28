@@ -56,7 +56,7 @@ typedef enum {
     kCCDirectorProjectionCustom,
     
     /// Detault projection is 3D projection
-    kCCDirectorProjectionDefault = kCCDirectorProjection3D,
+    kCCDirectorProjectionDefault = kCCDirectorProjection2D,
 } ccDirectorProjection;
 
 /* Forward declarations. */
